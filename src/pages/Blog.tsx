@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-
-type TagType = 'Tech' | 'Life' | 'Other';
-
-interface BlogPost {
-  title: string;
-  date: string;
-  link: string;
-  tag: TagType;
-}
+import type { LinkProps } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { BlogPost } from '../types';
+import { getAllPosts } from '../utils/blog';
 
 export function Blog() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [visitedPosts, setVisitedPosts] = useState<Set<string>>(new Set());
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
 
   useEffect(() => {
     // Load visited posts from localStorage
@@ -20,13 +25,26 @@ export function Blog() {
     }
   }, []);
 
-  const handlePostClick = (link: string) => {
-    const updatedVisitedPosts = new Set(visitedPosts).add(link);
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const posts = await getAllPosts();
+        setBlogPosts(posts);
+      } catch (error) {
+        console.error('Error loading posts:', error);
+      }
+    };
+    
+    loadPosts();
+  }, []);
+
+  const handlePostClick = (slug: string) => {
+    const updatedVisitedPosts = new Set(visitedPosts).add(slug);
     setVisitedPosts(updatedVisitedPosts);
     localStorage.setItem('visitedPosts', JSON.stringify(Array.from(updatedVisitedPosts)));
   };
 
-  const getTagStyles = (tag: TagType): string => {
+  const getTagStyles = (tag: 'Tech' | 'Life' | 'Other'): string => {
     switch (tag) {
       case 'Tech':
         return 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300';
@@ -36,33 +54,6 @@ export function Blog() {
         return 'bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300';
     }
   };
-
-  const blogPosts: BlogPost[] = [
-    {
-      title: 'Building a Modern Web Application with React and TypeScript',
-      date: 'March 15, 2024',
-      link: '/blog/modern-web-application',
-      tag: 'Tech'
-    },
-    {
-      title: 'The Power of Server Components in React',
-      date: 'February 20, 2024',
-      link: '/blog/server-components',
-      tag: 'Tech'
-    },
-    {
-      title: 'Finding Balance in Remote Work',
-      date: 'January 25, 2024',
-      link: '/blog/remote-work-balance',
-      tag: 'Life'
-    },
-    {
-      title: 'The Future of AI in Our Daily Lives',
-      date: 'January 10, 2024',
-      link: '/blog/ai-daily-lives',
-      tag: 'Other'
-    }
-  ];
 
   return (
     <div className="max-w-3xl mx-auto px-6">
@@ -75,16 +66,16 @@ export function Blog() {
       </header>
 
       <div className="divide-y divide-gray-100 dark:divide-gray-800">
-        {blogPosts.map((post, index) => (
+        {blogPosts.map((post) => (
           <article 
-            key={index} 
+            key={post.slug} 
             className={`py-6 first:pt-0 last:pb-0 group ${
-              visitedPosts.has(post.link) ? 'opacity-75' : ''
+              visitedPosts.has(post.slug) ? 'opacity-75' : ''
             }`}
           >
-            <a 
-              href={post.link} 
-              onClick={() => handlePostClick(post.link)}
+            <Link 
+              to={`/blog/${post.slug}`}
+              onClick={() => handlePostClick(post.slug)}
               className="block group-hover:bg-white dark:group-hover:bg-[#242424] group-hover:shadow-sm rounded-lg transition-all p-4 -m-4"
             >
               <div className="flex flex-col gap-2">
@@ -95,16 +86,26 @@ export function Blog() {
                 </span>
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
                   <h2 className={`text-[15px] font-medium transition-colors ${
-                    visitedPosts.has(post.link) 
+                    visitedPosts.has(post.slug) 
                       ? 'text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200' 
                       : 'dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400'
                   }`}>
                     {post.title}
+                    {post.isNew && (
+                      <span className="ml-2 inline-block px-2 py-0.5 text-[11px] font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full leading-none">
+                        NEW
+                      </span>
+                    )}
                   </h2>
-                  <time className="text-sm text-gray-500 dark:text-gray-400 shrink-0">{post.date}</time>
+                  <time className="text-sm text-gray-500 dark:text-gray-400 shrink-0">
+                    {formatDate(post.date)}
+                  </time>
                 </div>
+                <p className="text-[13px] text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {post.description}
+                </p>
               </div>
-            </a>
+            </Link>
           </article>
         ))}
       </div>

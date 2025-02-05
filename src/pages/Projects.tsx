@@ -1,5 +1,7 @@
 import React from 'react';
 import { ExternalLink, Github } from 'lucide-react';
+import habitXpImage from '../content/images/habitxp.png';
+import acuteReportImage from '../content/images/acutereport.png';
 
 interface Project {
   title: string;
@@ -14,60 +16,51 @@ interface Project {
 export function Projects() {
   const projects: Project[] = [
     {
-      title: 'AI-Powered Task Management',
-      date: 'March 1, 2024',
-      description: 'A smart task management system that uses AI to prioritize and categorize tasks automatically.',
-      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400',
-      link: '/projects/ai-task-manager',
-      githubUrl: 'https://github.com/username/ai-task-manager',
+      title: 'HabitXp',
+      date: 'Dec 30, 2024',
+      description: 'Habit tracker with sync and gamifications',
+      image: habitXpImage,
+      link: 'https://habitxp.com',
+      githubUrl: 'https://github.com/shinbehavior',
       bulletPoints: [
-        'Natural language processing for task interpretation',
-        'Smart task categorization and priority assignment',
-        'Real-time collaboration features',
-        'Progressive Web App (PWA) support'
+        'All on one graph, streaks',
+        'Sync',
+        'Leaderboard, XP, Achievements',
       ]
     },
     {
-      title: 'Distributed Cache System',
-      date: 'February 1, 2024',
-      description: 'High-performance distributed caching system built for scale.',
-      link: '/projects/distributed-cache',
-      githubUrl: 'https://github.com/username/distributed-cache',
+      title: 'AcuteReport',
+      date: 'Feb 2, 2025',
+      description: '2nd place project on Llama Hackathon by Meta',
+      image: acuteReportImage,
+      link: 'https://github.com/MartinJohannesNilsen/acutereport.ai',
+      githubUrl: 'https://github.com/MartinJohannesNilsen/acutereport.ai',
       bulletPoints: [
-        'Consistent hashing for node distribution',
-        'Configurable eviction policies',
-        'Support for multiple data types',
-        'Monitoring and analytics dashboard'
+        'maded by me and 3 m8',
+        'Llama 3.3 sum',
       ]
     },
     {
-      title: 'Real-time Data Pipeline',
-      date: 'January 15, 2024',
-      description: 'Scalable data pipeline for processing real-time events and analytics.',
-      image: 'https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&q=80&w=400',
-      link: '/projects/data-pipeline',
-      githubUrl: 'https://github.com/username/data-pipeline',
+      title: 'shinbehavior',
+      date: 'Feb 5, 2025',
+      description: 'This Website!',
+      link: 'https://github.com/shinbehavior/personal-webpage-v3',
+      githubUrl: 'https://github.com/shinbehavior/personal-webpage-v3',
       bulletPoints: [
-        'Stream processing with Apache Kafka',
-        'Custom aggregation framework',
-        'Fault-tolerant architecture',
-        'Real-time metrics and alerting'
+        'react, ts, tailwind',
+        'generate blog post by inserting .md file in the folder',
       ]
     },
     {
-      title: 'Machine Learning Platform',
-      date: 'January 5, 2024',
-      description: 'End-to-end platform for training and deploying machine learning models at scale.',
-      image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80&w=400',
-      link: '/projects/ml-platform',
-      githubUrl: 'https://github.com/username/ml-platform',
+      title: 'shaug',
+      date: 'Nov 6, 2024',
+      description: 'Tool for image augmenations',
+      link: 'https://github.com/shinbehavior/shaug',
+      githubUrl: 'https://github.com/shinbehavior/shaug',
       bulletPoints: [
-        'Automated model training pipeline',
-        'Model versioning and A/B testing',
-        'Real-time inference API',
-        'Performance monitoring dashboard'
+        'python script',
       ]
-    }
+    },
   ];
 
   return (
@@ -75,8 +68,7 @@ export function Projects() {
       <header className="mb-16">
         <h1 className="text-2xl font-medium mb-4 dark:text-white">Projects</h1>
         <p className="text-[15px] leading-relaxed text-gray-800 dark:text-gray-300">
-          A collection of open-source projects and experiments in software development,
-          machine learning, and distributed systems.
+          rn working mostly on closed-source and corpo projects
         </p>
       </header>
 

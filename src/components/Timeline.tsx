@@ -14,19 +14,19 @@ export function Timeline({ items, title = 'Latest' }: TimelineProps) {
       <h2 className="text-lg font-medium mb-8 dark:text-white">{title}</h2>
       <div className="relative">
         {/* Vertical Timeline Line */}
-        <div className="absolute left-[9px] top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700" />
+        <div className="absolute left-1 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700" />
         
         <div className="space-y-8">
           {items.map((item, index) => (
             <div key={index} className="group relative pl-12">
               {/* Timeline Marker */}
-              <div className="absolute left-0 top-1.5">
+              <div className="absolute left-0 top-[14px]">
                 {item.type === 'project' ? (
-                  <div className="relative z-10 bg-[#fafafa] dark:bg-[#1a1a1a] flex items-center justify-center w-[18px] h-[18px] transition-colors group-hover:text-blue-500 dark:text-gray-400 dark:group-hover:text-blue-400">
-                    <FolderGit2 size={18} className="transition-colors" />
+                  <div className="relative z-10 bg-[#fafafa] dark:bg-[#1a1a1a] flex items-center justify-center w-[18px] h-[18px] -ml-[3px] transition-colors group-hover:text-blue-500 dark:text-gray-400 dark:group-hover:text-blue-400">
+                    <FolderGit2 size={16} className="transition-colors" />
                   </div>
                 ) : (
-                  <div className="w-[9px] h-[9px] rounded-full bg-gray-400 dark:bg-gray-500 relative z-10 transition-colors group-hover:bg-blue-500 dark:group-hover:bg-blue-400" />
+                  <div className="w-[9px] h-[9px] rounded-full bg-gray-400 dark:bg-gray-500 relative z-10 transition-colors group-hover:bg-blue-500 dark:group-hover:bg-blue-400 -ml-[0px]" />
                 )}
               </div>
               

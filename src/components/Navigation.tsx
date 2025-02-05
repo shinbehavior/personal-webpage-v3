@@ -11,7 +11,7 @@ export function Navigation() {
     <nav className="py-8 transition-colors duration-200 dark:bg-[#1a1a1a]">
       <div className="max-w-3xl mx-auto px-6">
         <div className="flex justify-between items-center">
-          <Link to="/" className="font-serif text-2xl dark:text-white">Physical Intelligence (π)</Link>
+          <Link to="/" className="font-serif text-2xl dark:text-white">shin (進慎)</Link>
           <div className="flex items-center gap-6">
             <Link 
               to="/" 

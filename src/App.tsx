@@ -15,7 +15,7 @@ function App() {
           {/* Pull effects */}
           <div className="fixed inset-x-0 top-0 h-16 bg-gradient-to-b from-[#fafafa] dark:from-[#1a1a1a] to-transparent transform -translate-y-full" />
           <div className="fixed inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-100 dark:from-gray-800 to-transparent transform translate-y-full" />
-          
+             
           <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
