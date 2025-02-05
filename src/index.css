@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Liberation Mono from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Liberation+Mono:wght@400;700&display=swap');
+
+@layer base {
+  body {
+    @apply text-gray-900 antialiased;
+    font-family: 'Liberation Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+}
+
+/* Add custom serif font */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+.font-serif {
+  font-family: 'Newsreader', serif;
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(-200%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(300%) skewX(-12deg);
+  }
+}
+
+.animate-shine {
+  animation: shine 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
